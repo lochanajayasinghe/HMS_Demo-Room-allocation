@@ -1,0 +1,17 @@
+com\PeraUni\HMS_Demo\exception\AllocationException.class
+com\PeraUni\HMS_Demo\model\Student.class
+com\PeraUni\HMS_Demo\service\StudentService.class
+com\PeraUni\HMS_Demo\model\Allocation.class
+com\PeraUni\HMS_Demo\repository\AllocationRepository.class
+com\PeraUni\HMS_Demo\model\Eligibility.class
+com\PeraUni\HMS_Demo\model\EligibilityId.class
+com\PeraUni\HMS_Demo\repository\StudentRepository.class
+com\PeraUni\HMS_Demo\service\MainInterfaceService.class
+com\PeraUni\HMS_Demo\controller\MainInterfaceController.class
+com\PeraUni\HMS_Demo\service\RoomService.class
+com\PeraUni\HMS_Demo\model\Room.class
+com\PeraUni\HMS_Demo\repository\MainInterfaceRepository.class
+com\PeraUni\HMS_Demo\model\Hostel.class
+com\PeraUni\HMS_Demo\HmsDemoApplication.class
+com\PeraUni\HMS_Demo\repository\RoomRepository.class
+com\PeraUni\HMS_Demo\service\AllocationService.class

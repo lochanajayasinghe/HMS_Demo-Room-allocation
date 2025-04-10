@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Room List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full bg-gray-100">
+<div class="min-h-screen flex flex-col">
+  <!-- Navigation (same as before) -->
+
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900">Available Rooms</h1>
+      <p class="text-gray-600 mt-2" th:text="'Hostel ID: ' + ${hostelId}"></p>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <table class="w-full">
+        <thead class="bg-gray-800 text-white">
+        <tr>
+          <th class="p-3">Room ID</th>
+          <th class="p-3">Room No</th>
+          <th class="p-3">Capacity</th>
+          <th class="p-3">Available</th>
+          <th class="p-3">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room : ${roomList}" class="border-b">
+          <td class="p-3 text-center" th:text="${room.roomId}"></td>
+          <td class="p-3 text-center" th:text="${room.roomNo}"></td>
+          <td class="p-3 text-center" th:text="${room.capacity}"></td>
+          <td class="p-3 text-center" th:text="${room.available}"></td>
+          <td class="p-3 text-center">
+            <a th:href="@{'/students?hostelId=' + ${hostelId} + '&roomId=' + ${room.roomId}}"
+               class="bg-green-600 text-white px-3 py-1 rounded-md text-sm hover:bg-green-700">
+              Allocate Students
+            </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex justify-between mt-4">
+      <a th:href="@{/}"
+         class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+        ← Back to Rooms
+      </a>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

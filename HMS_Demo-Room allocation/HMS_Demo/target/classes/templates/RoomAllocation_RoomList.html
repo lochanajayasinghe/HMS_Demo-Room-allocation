@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full bg-gray-100">
+
+<div class="min-h-screen flex flex-col">
+  <nav class="bg-gray-800 shadow-md">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <img class="h-8 w-8" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          <div class="hidden md:block ml-10">
+            <div class="flex space-x-4">
+              <a th:href="@{/}" class="text-white px-3 py-2 rounded-md text-sm font-medium bg-gray-900">Dashboard</a>
+              <a th:href="@{/room}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Warden</a>
+              <a th:href="@{/Dean}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dean</a>
+              <a th:href="@{/}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Main Interface</a>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900">List Of Hostel Rooms</h1>
+      <p class="text-gray-600 mt-2" th:text="'Hostel: ' + ${roomList[0]?.hostel?.name}"></p>
+    </div>
+  </header>
+
+  <main class="flex-1 container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="table-auto w-full border-collapse border border-gray-200">
+        <thead class="bg-gray-800 text-white uppercase">
+        <tr>
+          <th class="px-6 py-3 text-center border">Room ID</th>
+          <th class="px-6 py-3 text-center border">Room No</th>
+          <th class="px-6 py-3 text-center border">Capacity</th>
+          <th class="px-6 py-3 text-center border">Available</th>
+          <th class="px-6 py-3 text-center border">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="bg-gray-50 border-b" th:each="room : ${roomList}">
+          <td class="px-6 py-4 text-center border" th:text="${room.roomId}"></td>
+          <td class="px-6 py-4 text-center border" th:text="${room.roomNo}"></td>
+          <td class="px-6 py-4 text-center border" th:text="${room.capacity}"></td>
+          <td class="px-6 py-4 text-center border" th:text="${room.available}"></td>
+          <td class="px-6 py-4 text-center border flex space-x-2 justify-center">
+            <a th:href="@{'/students?hostelId=' + ${room.hostel.hostelId} + '&roomId=' + ${room.roomId}}"
+               class="bg-green-600 text-white px-3 py-1 rounded-md text-sm hover:bg-green-700">
+              Allocate Students
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</body>
+</html>

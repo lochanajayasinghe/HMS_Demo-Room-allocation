@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Allocation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full bg-gray-100">
+
+<div class="min-h-screen flex flex-col">
+  <nav class="bg-gray-800 shadow-md">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <img class="h-8 w-8" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          <div class="hidden md:block ml-10">
+            <div class="flex space-x-4">
+              <a th:href="@{/}" class="text-white px-3 py-2 rounded-md text-sm font-medium bg-gray-900">Dashboard</a>
+              <a th:href="@{/room}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Warden</a>
+              <a th:href="@{/Dean}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dean</a>
+              <a th:href="@{/}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Main Interface</a>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900">Student Allocation</h1>
+      <div class="mt-2 flex items-center">
+        <span class="text-gray-600 mr-2">Room:</span>
+        <span class="font-medium" th:text="${roomId} ?: 'Not selected'"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <form th:action="@{/allocateStudents}" method="post">
+      <input type="hidden" name="hostelId" th:value="${hostelId}">
+      <input type="hidden" name="roomId" th:value="${roomId}">
+
+      <div class="bg-white shadow-md rounded-lg overflow-hidden mb-6">
+        <table class="w-full">
+          <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="px-6 py-3 text-center border">Select</th>
+            <th class="px-6 py-3 text-center border">Reg No</th>
+            <th class="px-6 py-3 text-center border">Name</th>
+            <th class="px-6 py-3 text-center border">Faculty</th>
+            <th class="px-6 py-3 text-center border">Batch</th>
+            <th class="px-6 py-3 text-center border">Eligibility</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="student : ${students}" class="border-b hover:bg-gray-50">
+            <td class="p-3 text-center">
+              <input type="checkbox" name="selectedRegNos" th:value="${student.regNo}"
+                     class="form-checkbox h-5 w-5 text-blue-600">
+            </td>
+            <td class="px-6 py-4 text-center border" th:text="${student.regNo}"></td>
+            <td class="px-6 py-4 text-center border" th:text="${student.firstName} + ' ' + ${student.surname}"></td>
+            <td class="px-6 py-4 text-center border" th:text="${student.faculty}"></td>
+            <td class="px-6 py-4 text-center border" th:text="${student.batch}"></td>
+            <td class="px-6 py-4 text-center border">
+              <span th:if="${student.eligible}" class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Eligible</span>
+              <span th:unless="${student.eligible}" class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Not Eligible</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <a th:href="@{'/Hostel?hostelId=' + ${hostelId}}" class="text-blue-600 hover:text-blue-800">
+          ← Back to Rooms
+        </a>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700">
+          Allocate Selected Students
+        </button>
+      </div>
+    </form>
+  </main>
+</div>
+</body>
+</html>
